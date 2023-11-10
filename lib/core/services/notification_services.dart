@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:workmanager/workmanager.dart';
 import '../../fileExport.dart';
 
 class NotificationServices {
@@ -61,7 +62,7 @@ class NotificationServices {
     }
   }
 
-  void ss(String title,String body,DateTime dateTime)async{
+  void sendScheduleNotification(String title,String body,DateTime dateTime)async{
     tz.initializeTimeZones();
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
@@ -75,14 +76,22 @@ class NotificationServices {
                 channelDescription: 'Notification channel for Bored.'),
           iOS: DarwinNotificationDetails(presentAlert: true,presentSound: true),
         ),
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
         uiLocalNotificationDateInterpretation:
         UILocalNotificationDateInterpretation.absoluteTime);
 
   }
 
 
-
+}
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    FlutterLocalNotificationsPlugin flip =  FlutterLocalNotificationsPlugin();
+    var settings =   const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),iOS: DarwinInitializationSettings());
+   flip.initialize(settings);
+    return Future.value(true);
+  });
 }
 
 

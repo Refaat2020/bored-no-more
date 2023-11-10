@@ -103,7 +103,7 @@ class ActivitiesCubit extends Cubit<ActivitiesState> {
         emit(ActivitiesError(error: failed.message!));
       },
       onSuccess: (value) async{
-        _notificationServices.ss("it's time to execute your activity", "${plannedActivity?.activityName}",selectedTimeForExecution!);
+        _notificationServices.sendScheduleNotification("it's time to execute your activity", "${plannedActivity?.activityName}",selectedTimeForExecution!);
 
         emit(ActivitiesPlannedAdded());
       },
@@ -126,7 +126,7 @@ class ActivitiesCubit extends Cubit<ActivitiesState> {
         emit(ActivitiesError(error: failed.message!));
       },
       onSuccess: (value) async{
-        _notificationServices.ss("it's time to execute your activity", "${plannedActivity?.activityName}",selectedTimeForExecution!);
+        _notificationServices.sendScheduleNotification("it's time to execute your activity", "${plannedActivity?.activityName}",selectedTimeForExecution!);
         emit(ActivitiesPlannedUpdated());
       },
     );

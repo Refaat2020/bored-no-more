@@ -1,9 +1,11 @@
 import 'package:bored_no_more/core/constants/app_theme.dart';
+import 'package:bored_no_more/core/services/notification_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'core/config/app_cubits.dart';
 import 'core/config/app_route.dart';
@@ -23,6 +25,26 @@ void main()async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Bloc.observer = AppBlocObserver();
+  Workmanager().initialize(
+      callbackDispatcher,
+      isInDebugMode: false
+  );
+  // Periodic task registration
+  Workmanager().registerPeriodicTask(
+    "2",
+
+    //This is the value that will be
+    // returned in the callbackDispatcher
+    "simplePeriodicTask",
+
+    // When no frequency is provided
+    // the default 15 minutes is set.
+    // Minimum frequency is 15 min.
+    // Android will automatically change
+    // your frequency to 15 min
+    // if you have configured a lower frequency.
+    frequency: const Duration(minutes: 3),
+  );
   runBored();
 }
 void runBored(){
