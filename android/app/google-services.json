@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687245243284",
+    "project_id": "bored-yazen",
+    "storage_bucket": "bored-yazen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687245243284:android:9e6c60839c8bf117b45581",
+        "android_client_info": {
+          "package_name": "com.bored.more.bored_no_more"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRKRNyRg4sHDKm6sbxOrDmwh9IyNB965Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
